@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-
+import { Provider } from 'react-redux';
+import Main from './components/Main';
+import store from './redux/store';
 export default class App extends Component {
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: 'yellow', alignSelf: 'stretch' }} />
+      <Provider store={store}>
+        <Main />
+      </Provider>
     );
   }
 }
+
+
+
