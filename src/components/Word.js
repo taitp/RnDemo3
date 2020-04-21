@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { toggleMemorized, toggleShowWord } from '../redux/actionCreators';
 class Word extends Component {
-    memorizeWord() {
-        this.props.dispatch({
-            type: 'TOGGLE_MEMORIZED',
-            id: this.props.myWord.id
-        });
-    }
-    toggleShowWord() {
-        this.props.dispatch({
-            type: 'TOGGLE_SHOW',
-            id: this.props.myWord.id
-        });
-    }
     render() {
-        const { en, vn, memorized, isShow } = this.props.myWord;
+        const { en, vn, memorized, isShow, id } = this.props.myWord;
         const textDecorationLine = memorized ? 'line-through' : 'none';
         const memorizedButtontext = memorized ? 'forget' : 'memorized';
         const meaning = isShow ? vn : "--------";
@@ -27,12 +16,12 @@ class Word extends Component {
                 <View style={styles.controller}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={this.memorizeWord.bind(this)}>
+                        onPress={() => this.props.toggleMemorized(id)}>
                         <Text>{memorizedButtontext}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={this.toggleShowWord.bind(this)}
+                        onPress={() => this.props.toggleShowWord(id)}
                     >
                         <Text>{isShowButtontext}</Text>
                     </TouchableOpacity>
@@ -57,4 +46,4 @@ const styles = StyleSheet.create({
         margin: 10
     }
 })
-export default connect()(Word)
+export default connect(null, { toggleMemorized, toggleShowWord })(Word)

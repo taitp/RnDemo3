@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import Word from './Word';
 import Filter from './Filter';
